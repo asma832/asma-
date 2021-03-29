@@ -1,13 +1,17 @@
 
+#include<stdio.h>
+#include<stdlib.h>
+#include<SDL/SDL.h>
+#include"SDL/SDL_image.h"
 #include"pers.h"
 int initialiser (personnage *p)
-{SDL_Rect position_h1,position_h2,position_h3,position_score ,position_lifes;
+{SDL_Rect position_h1,position_h2,position_h3,position_score ;
 SDL_Surface *h1=NULL,*h2=NULL,*h3=NULL,*score=NULL,*lifes=NULL;
 p->perso=IMG_Load("personnage ");
-p->position.x=0;
-p->position.y=0;
-p->position.w=p->img->w;
-p->position.h=p->img->h;
+p->position.x=60;
+p->position.y=50;
+p->position.w=p->perso->w;
+p->position.h=p->perso->h;
 h1=IMG_Load("heart");
 h2=IMG_Load("heart");
 h3=IMG_Load("heart");
@@ -21,8 +25,7 @@ position_h3.x=217;
 position_h3.y=10;
 position_score.x=460;
 position_score.y=0;
-position_lifes.x=130;
-position_lifes.y=0;
+
 }
 
 int afficher (personnage p,SDL_Surface *screen )
@@ -31,10 +34,10 @@ SDL_BlitSurface(h1,NULL,screen,&position_h1);
 SDL_BlitSurface(h2,NULL,screen,&position_h2);
 SDL_BlitSurface(h3,NULL,screen,&position_h3);
 SDL_BlitSurface(score,NULL,screen,&position_score);
-SDL_BlitSurface(lifes,NULL,screen,&position_lifes);
+
 }
 
-void deplacer (SDL_Surface *screen , personnage p)
+/*void deplacer (SDL_Surface *screen , personnage p)
 {
 char ch[20];
 int continuer =1;
@@ -71,7 +74,7 @@ break;
 }
 SDL_Flip(sreen);
 }
-}
+}*/
 void vecteur (input *in,int *vx ,int *vy)
 {
 int vitesse =5;
@@ -83,30 +86,30 @@ if (in->key[SDLK_RIGHT])*vx=vitesse;
 }
 
 
-int DeplaceSprite(Sprite* perso,,int vx,int vy) 
+int DeplaceSprite(personnage * p,,int vx,int vy) 
 { 
-    if (EssaiDeplacement(perso,vx,vy)==1) 
+    if (EssaiDeplacement(p,vx,vy)==1) 
 
         return 1; 
 
     return 2; 
 }
 
-int EssaiDeplacement(Sprite* perso,int vx,int vy) 
+int EssaiDeplacement(personnage * p,int vx,int vy) 
 { 
     SDL_Rect test; 
-    test = perso->position; 
+    test = p->position; 
     test.x+=vx; 
     test.y+=vy; 
     
     return 0;
 
 }
-void Evolue(Input* in,Sprite* perso)
+void Evolue(Input* in,personnage * p)
  { int vx,vy; RecupererVecteur(in,&vx,&vy); 
-  DeplaceSprite(perso,vx,vy);
+  DeplaceSprite(p,vx,vy);
  }
-void acceleration()
+/*void acceleration()
 {
 case 
 continuer =1;
@@ -127,4 +130,4 @@ break ;
 }
 }
 } 
-}
+}*/
